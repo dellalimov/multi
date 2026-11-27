@@ -1,0 +1,38 @@
+name: security
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 3 * * 1"
+permissions:
+  contents: read
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  codeql:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+          queries: security-extended
+      - uses: github/codeql-action/analyze@v3
+  private-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No workspace or secrets files committed
+        run: |
+          bad=$(git ls-files | grep -E '(^|/)(multi-workspace|demo-workspace)/|(^|/)secrets\.json$|(^|/)\.env$' || true)
+          if [ -n "$bad" ]; then echo "Private files committed:"; echo "$bad"; exit 1; fi

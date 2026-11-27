@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { exec } from 'node:child_process';
+import crypto from 'node:crypto';
 import { workspaceDir, load } from '../lib/workspace.mjs';
 import { createServer } from '../lib/server.mjs';
 import { doctor } from '../lib/doctor.mjs';
@@ -26,12 +27,17 @@ const commands = {
   dashboard() {
     if (!fs.existsSync(ws)) { console.error(`No workspace at ${ws}. Run: multi init`); process.exit(1); }
     const port = Number(flag('--port', process.env.PORT || 4747));
-    createServer(ws).listen(port, '127.0.0.1', () => {
-      const url = `http://localhost:${port}`;
-      console.log(`MULTI dashboard → ${url}\nworkspace: ${ws}`);
+    const allowHosts = (flag('--allow-host', process.env.MULTI_ALLOW_HOSTS || '') || '').split(',').map(s => s.trim()).filter(Boolean);
+    // Anything reachable beyond this machine must have a token; generate one if none was given.
+    let token = flag('--token', process.env.MULTI_TOKEN || '');
+    if (allowHosts.length && !token) token = crypto.randomBytes(24).toString('hex');
+    if (token && !/^[A-Za-z0-9_-]{24,}$/.test(token)) { console.error('Token must be 24+ characters of A-Z a-z 0-9 _ -'); process.exit(1); }
+    createServer(ws, { token, allowHosts }).listen(port, '127.0.0.1', () => {
+      const url = `http://localhost:${port}${token ? '/?token=' + token : ''}`;
+      console.log(`MULTI dashboard → ${url}\nworkspace: ${ws}${allowHosts.length ? `\nalso answering for: ${allowHosts.join(', ')} (token required; open https://<host>/?token=${token} once)` : ''}`);
       if (!args.includes('--no-open')) {
         const opener = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start ""' : 'xdg-open';
-        exec(`${opener} ${url}`, () => {});
+        exec(`${opener} "${url}"`, () => {});
       }
     });
   },
@@ -82,7 +88,8 @@ const commands = {
     console.log(`multi <command> [--workspace path]
 
   init [--example]   create a workspace (MULTI_WORKSPACE or ./multi-workspace)
-  dashboard [--port 4747] [--no-open]   open the local dashboard
+  dashboard [--port 4747] [--no-open] [--token T] [--allow-host tunnel.example.com]
+                     open the local dashboard (token is required and auto-created when --allow-host is used)
   status             print what is waiting for you
   doctor             check every workspace file (frontmatter, statuses, ids, assets)
   secrets            create ~/.multi/secrets.json for API keys (kept outside the workspace)

@@ -4,3 +4,7 @@ demo-workspace/
 *.plugin
 .DS_Store
 .env
+secrets.json
+.multi/
+*.pem
+*.key

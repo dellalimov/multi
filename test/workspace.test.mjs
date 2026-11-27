@@ -71,9 +71,9 @@ test('server: state + update + cross-origin block', async () => {
   const base = `http://127.0.0.1:${srv.address().port}`;
   const st = await (await fetch(base + '/api/state')).json();
   assert.equal(st.items.length, 3);
-  const ok = await fetch(base + '/api/items/t1', { method: 'POST', body: JSON.stringify({ status: 'done' }) });
+  const ok = await fetch(base + '/api/items/t1', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ status: 'done' }) });
   assert.equal((await ok.json()).status, 'done');
-  const bad = await fetch(base + '/api/items/t1', { method: 'POST', headers: { origin: 'https://evil.example' }, body: '{"status":"open"}' });
+  const bad = await fetch(base + '/api/items/t1', { method: 'POST', headers: { origin: 'https://evil.example', 'content-type': 'application/json' }, body: '{"status":"open"}' });
   assert.equal(bad.status, 403);
   const html = await (await fetch(base + '/')).text();
   assert.match(html, /MULTI/);

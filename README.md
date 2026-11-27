@@ -65,6 +65,8 @@ Setup for every API: [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md). Running it 
 Then open the dashboard:
 
 - **Companies and channels in the sidebar.** Pick a company, a channel, or both; every view filters to that scope, with live counters of what waits for you.
+- **Team.** The whole org chart, the way a company looks: you → the Brain (CMO) → departments and platform teams, every agent with a live dot that lights up when it works.
+- **Waiting on your yes + What interrupts the loop.** One number for everything that needs you, and the things agents hand back: hot leads, untouched leads, complaints, failed publishes, missing AI labels.
 - **Coverage matrix.** Every company × channel at a glance: active, still to set up, or off, and how many items are waiting. Click a cell to jump into that pipeline.
 - **Review.** Media previews in phone frames, edit the caption inline, approve one by one or all at once, or send back with a note the team reads next run. Arabic and other RTL languages render right to left.
 - **Engagement.** Edit the draft, open the thread, copy, send it yourself, mark it sent.
@@ -77,6 +79,8 @@ Give each company its own accent with `color: "#hex"` in its brief.
 | Review | Engagement (light) |
 |---|---|
 | ![Review](docs/screenshots/review.png) | ![Engagement](docs/screenshots/engagement.png) |
+
+![Team](docs/screenshots/team.png)
 
 | Calendar | Analytics |
 |---|---|
@@ -148,6 +152,10 @@ MULTI does not hold your social logins. It schedules through a tool you already 
 - **[Postiz](https://github.com/gitroomhq/postiz-app)**, open source and self-hostable, via its MCP server or CLI.
 
 Inbound comments and DMs come in through official APIs (`multi inbox`): Instagram and Facebook via a Meta app on Standard Access for your own Pages, YouTube via a Data API key. See [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md).
+
+## Security
+
+Built to fail closed: keys only in `~/.multi/secrets.json` (chmod 600, never in the workspace), a dashboard that answers only to localhost or a token, a strict script-hash Content-Security-Policy, CSRF and DNS-rebinding guards, prompt-injection rules for every agent, and CI with gitleaks and CodeQL. Details in [SECURITY.md](SECURITY.md).
 
 ## Ground rules
 

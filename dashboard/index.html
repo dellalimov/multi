@@ -64,12 +64,12 @@ aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 22px
 
 /* ---------- top ---------- */
 .main { min-width: 0; }
-.top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 18px; padding: 16px 34px; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--line); }
+.top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 14px 28px; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--line); }
 .crumb { display: flex; align-items: center; gap: 8px; font: 600 15px/1 var(--display); white-space: nowrap; }
 .crumb .sep { color: var(--faint); font-weight: 400; }
 .crumb .dim { color: var(--muted); font-weight: 500; }
 .tabs { position: relative; display: flex; gap: 2px; padding: 4px; margin-left: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow-x: auto; }
-.tab { position: relative; z-index: 1; display: flex; align-items: center; gap: 6px; padding: 7px 10px; border: 0; background: none; border-radius: 8px; cursor: pointer; color: var(--muted); font-weight: 550; white-space: nowrap; transition: color .25s var(--ease); }
+.tab { position: relative; z-index: 1; display: flex; align-items: center; gap: 5px; padding: 6px 9px; font-size: 13px; border: 0; background: none; border-radius: 8px; cursor: pointer; color: var(--muted); font-weight: 550; white-space: nowrap; transition: color .25s var(--ease); }
 .tab.on { color: var(--ink); }
 .tab .count { padding: 0 6px; line-height: 17px; }
 .tab-ind { position: absolute; z-index: 0; top: 4px; bottom: 4px; border-radius: 8px; background: var(--panel2); box-shadow: var(--glow); transition: left .45s var(--spring), width .45s var(--spring); }
@@ -201,6 +201,43 @@ textarea { min-height: 130px; resize: vertical; line-height: 1.55; }
 .mtable th { text-align: right; font: 600 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--line); }
 .mtable th:first-child, .mtable td:first-child { text-align: left; }
 .mtable td { text-align: right; padding: 10px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+/* ---------- team ---------- */
+.org { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.node { position: relative; display: flex; align-items: center; gap: 12px; padding: 14px 22px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); box-shadow: var(--glow); }
+.node.boss { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent), var(--glow); }
+.node.brain { padding: 18px 26px; border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--panel)), var(--panel)); }
+.node b { font: 700 16px/1.1 var(--display); }
+.node small { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+.vline { width: 2px; height: 26px; background: linear-gradient(var(--line2), var(--accent)); position: relative; overflow: hidden; }
+.vline::after { content: ""; position: absolute; left: 0; top: -40%; width: 100%; height: 40%; background: var(--accent); animation: flow 1.8s linear infinite; }
+@keyframes flow { to { top: 110%; } }
+.depts { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; width: 100%; margin-top: 6px; position: relative; padding-top: 18px; border-top: 2px solid var(--line); }
+.dept { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 14px 10px; transition: transform .3s var(--spring), border-color .2s; }
+.dept:hover { transform: translateY(-2px); border-color: var(--line2); }
+.dept h4 { margin: 0 0 2px; display: flex; align-items: center; gap: 8px; font: 700 13px/1.2 var(--display); }
+.dept h4 .count { margin-left: auto; }
+.dept p { margin: 0 0 10px; color: var(--muted); font-size: 11.5px; }
+.ag { display: flex; align-items: center; gap: 8px; padding: 5px 4px; border-radius: 7px; font-size: 12.5px; cursor: default; }
+.ag:hover { background: var(--panel2); }
+.ag .d { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); flex: none; }
+.ag .d.live { background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: pulse 2.4s infinite; }
+.ag .d.recent { background: color-mix(in srgb, var(--ok) 45%, var(--faint)); }
+.ag .n { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ag .m { font: 600 9.5px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.ag .c { font: 600 10.5px var(--mono); color: var(--ink2); min-width: 16px; text-align: right; }
+.layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; margin-top: 18px; }
+.layer { border: 1px dashed var(--line2); border-radius: var(--r); padding: 12px 14px; font-size: 12px; color: var(--muted); }
+.layer b { display: block; color: var(--ink); font: 600 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+.layer code { font: 11px var(--mono); color: var(--ink2); }
+/* interrupts */
+.intr { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.intr .i { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--panel2); border: 1px solid var(--line); cursor: pointer; transition: transform .3s var(--spring), border-color .2s; }
+.intr .i:hover { transform: translateY(-2px); border-color: var(--c); }
+.intr .i b { font: 700 22px/1 var(--display); color: var(--c); min-width: 26px; }
+.intr .i span { font-size: 12.5px; color: var(--ink2); line-height: 1.3; }
+.intr .i.zero { opacity: .45; } .intr .i.zero b { color: var(--muted); }
+.kpi.hero { grid-column: span 2; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, var(--panel)), var(--panel)); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.kpi.hero .v { font-size: 40px; }
 /* ---------- kanban ---------- */
 .kanban { display: grid; grid-template-columns: repeat(6, minmax(160px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 10px; }
 .col { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; min-height: 220px; }
@@ -263,9 +300,10 @@ const PLATFORMS = {
   x: ['X', 'X', '#6b6b76'], linkedin: ['LinkedIn', 'IN', '#2a7be4'], threads: ['Threads', 'TH', '#9b9ba5'],
   pinterest: ['Pinterest', 'PI', '#e6233a'], reddit: ['Reddit', 'RD', '#ff5a1f'], facebook: ['Facebook', 'FB', '#3b6ef5'],
   blog: ['Blog · SEO', 'SEO', '#22b573'], gbp: ['Google Business', 'GB', '#f2b01e'], email: ['Email', '@', '#a07cff'],
+  telegram: ['Telegram', 'TG', '#2aa3e0'], whatsapp: ['WhatsApp', 'WA', '#25c25a'], quora: ['Quora', 'QA', '#c4302b'], medium: ['Medium', 'MD', '#8d8d8d'], substack: ['Substack', 'SB', '#ff6719'],
 };
 const PALETTE = ['#8b7bff', '#ff6b9a', '#3ddc97', '#ffb547', '#4db8ff', '#ff7a45', '#c56bff', '#2fd3c6'];
-const VIEWS = [['overview', 'Overview'], ['review', 'Review'], ['engagement', 'Engagement'], ['pipeline', 'Pipeline'], ['calendar', 'Calendar'], ['analytics', 'Analytics'], ['leads', 'Leads'], ['tasks', 'Needs you'], ['trends', 'Trends']];
+const VIEWS = [['overview', 'Overview'], ['team', 'Team'], ['review', 'Review'], ['engagement', 'Engagement'], ['pipeline', 'Pipeline'], ['calendar', 'Calendar'], ['analytics', 'Analytics'], ['leads', 'Leads'], ['tasks', 'Needs you'], ['trends', 'Trends']];
 const STAGES = [['idea', '#7d7b75'], ['draft', '#4db8ff'], ['review', '#ffb547'], ['approved', '#3ddc97'], ['scheduled', '#8b7bff'], ['published', '#c9c7c0']];
 
 const S = { state: null, sig: '', view: 'overview', brand: 'all', plat: 'all', editing: new Set(), anim: true, week: 0 };
@@ -313,7 +351,7 @@ function mediaStrip(i) {
     const src = a.url && safeUrl(a.url) ? a.url : a.file ? '/' + a.file.replace(/^\/+/, '') : '';
     if (!src) return `<div class="prompt"><b>not rendered</b>${esc(String(a.prompt || '').slice(0, 140))}</div>`;
     const kind = a.kind || (isVideo(src) ? 'video' : 'image');
-    return `<a class="phone ${frameClass(i)}" href="${esc(src)}" target="_blank" rel="noopener">${kind === 'video' ? `<video src="${esc(src)}" muted loop playsinline preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>` : `<img src="${esc(src)}" alt="" loading="lazy">`}<span class="k">${esc(a.role || kind)}</span></a>`;
+    return `<a class="phone ${frameClass(i)}" href="${esc(src)}" target="_blank" rel="noopener">${kind === 'video' ? `<video src="${esc(src)}" muted loop playsinline preload="metadata"></video>` : `<img src="${esc(src)}" alt="" loading="lazy">`}<span class="k">${esc(a.role || kind)}</span></a>`;
   }).join('')}</div>`;
 }
 
@@ -335,7 +373,7 @@ async function refresh(force) {
   try {
     const r = await fetch('/api/state', { cache: 'no-store' });
     const st = await r.json();
-    const sig = JSON.stringify(st.items.map(i => [i.id, i.status, i.mtime])) + st.brands.length + st.trends.length + '|' + (st.metrics || []).length;
+    const sig = JSON.stringify(st.items.map(i => [i.id, i.status, i.mtime])) + st.brands.length + st.trends.length + '|' + (st.metrics || []).length + JSON.stringify(st.activity || {});
     $('pulse').className = 'pulse';
     $('sync').textContent = 'live · ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     if (sig === S.sig && !force) return;
@@ -386,10 +424,12 @@ const head = (title, lede) => `<div><h1 class="h1">${title}</h1><p class="lede">
 const empty = (big, text) => `<div class="empty"><div class="big">${big}</div><div>${text}</div></div>`;
 
 const VIEW = {
+  team() { return teamView(); },
   overview() {
     const st = S.state, scope = st.items.filter(inScope);
     const n = (t, s) => scope.filter(i => i.type === t && i.status === s).length;
-    const kpis = [['In review', n('content', 'review'), '#ffb547', 'review'], ['Approved', n('content', 'approved'), '#3ddc97', 'pipeline'], ['Scheduled', n('content', 'scheduled'), '#8b7bff', 'pipeline'], ['Engagement', n('engagement', 'pending'), '#4db8ff', 'engagement'], ['New leads', n('lead', 'new'), '#ff6b9a', 'leads'], ['Needs you', n('task', 'open'), '#ff5d5d', 'tasks']];
+    const yes = n('content', 'review') + n('engagement', 'pending') + n('task', 'open');
+    const kpis = [['Waiting on your yes', yes, '#8b7bff', 'review', 'hero'], ['AI agents', (st.agents || []).length, '#3ddc97', 'team'], ['Scheduled', n('content', 'scheduled'), '#4db8ff', 'calendar'], ['New leads', n('lead', 'new'), '#ff6b9a', 'leads'], ['Human employees', 1, '#ffb547', 'tasks']];
     const brands = st.brands.filter(b => S.brand === 'all' || b.slug === S.brand);
     const plats = platformsInUse().filter(k => S.plat === 'all' || k === S.plat);
     const cell = (bs, k) => {
@@ -403,7 +443,8 @@ const VIEW = {
     const next = scope.filter(i => i.type === 'content' && i.status === 'review').slice(0, 4);
     const tasks = scope.filter(i => i.type === 'task' && i.status === 'open').sort((a, b) => (b.priority === 'high') - (a.priority === 'high')).slice(0, 4);
     return head('Overview', `${brands.length} ${brands.length === 1 ? 'company' : 'companies'} · ${plats.length} channels · everything waiting for you, at a glance.`)
-      + `<div class="kpis">${kpis.map(([l, v, k, go]) => `<div class="kpi" style="--k:${k}" data-view="${go}"><div class="v" data-count="${v}">0</div><div class="l">${l}</div></div>`).join('')}</div>`
+      + `<div class="kpis">${kpis.map(([l, v, k, go, cls]) => `<div class="kpi ${cls || ''}" style="--k:${k}" data-view="${go}"><div class="v" data-count="${v}">0</div><div class="l">${l}${l === 'Human employees' ? ' · you' : ''}</div></div>`).join('')}</div>`
+      + interrupts(scope)
       + (brands.length ? `<div class="panel"><h3>Coverage <small>companies × channels · number = waiting for you</small></h3><div style="overflow-x:auto"><table class="matrix"><tr><th></th>${plats.map(k => `<th title="${esc(plat(k).name)}">${esc(plat(k).short)}</th>`).join('')}</tr>${brands.map(bs => { const bb = brand(bs.slug); return `<tr><td class="b"><span class="bname" data-brand="${esc(bs.slug)}">${mono(bb.initials, bb.color)}${esc(bb.name)}</span></td>${plats.map(k => cell(bs, k)).join('')}</tr>`; }).join('')}</table></div>
         <div class="legend"><span><i style="background:color-mix(in srgb,var(--accent) 25%,var(--panel2))"></i>active</span><span><i style="border:1px dashed var(--warn)"></i>to set up</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line) 3px 4px)"></i>off</span></div></div>`
         : empty('0', 'No companies yet. Run <code>multi-brand-onboarding</code> in Claude.'))
@@ -481,6 +522,49 @@ const VIEW = {
   },
 };
 
+function interrupts(scope) {
+  const now = Date.now(), old = i => i.created && (now - Date.parse(i.created)) > 48 * 3600e3;
+  const list = [
+    ['Hot leads waiting', scope.filter(i => i.type === 'lead' && i.status === 'new' && i.value === 'high').length, '#ff6b9a', 'leads'],
+    ['Leads untouched 48h+', scope.filter(i => i.type === 'lead' && i.status === 'new' && old(i)).length, '#ffb547', 'leads'],
+    ['Urgent tasks / complaints', scope.filter(i => i.type === 'task' && i.status === 'open' && i.priority === 'high').length, '#ff5d5d', 'tasks'],
+    ['Publish failed', scope.filter(i => i.type === 'content' && i.publish_error).length, '#ff5d5d', 'pipeline'],
+    ['Need an AI label', scope.filter(i => i.type === 'content' && i.ai_generated === true && i.ai_label !== 'required' && ['review', 'approved'].includes(i.status)).length, '#ffb547', 'review'],
+    ['Sent back this week', scope.filter(i => i.type === 'content' && i.status === 'rejected').length, '#7d7b75', 'pipeline'],
+  ];
+  return `<div class="panel"><h3>What interrupts the loop <small>things agents hand to you</small></h3><div class="intr">${list.map(([l, v, c, go]) => `<div class="i ${v ? '' : 'zero'}" style="--c:${c}" data-view="${go}"><b>${v}</b><span>${l}</span></div>`).join('')}</div></div>`;
+}
+
+const DEPTS = [
+  ['Research', 'What the audience cares about this week', ['trend-scout', 'listening', 'virality-analyst', 'x-intelligence']],
+  ['Quality', 'Nothing off-brand or non-compliant ships', ['brand-guardian', 'compliance']],
+  ['Craft', 'Languages, media, repurposing', ['localizer', 'media-producer', 'repurposer']],
+  ['Growth', 'Numbers, boosts, partners', ['analyst', 'paid-amplifier', 'creator-outreach']],
+  ['Inbound', 'People who come to you', ['community-manager', 'lead-router', 'crisis-desk', 'reputation']],
+  ['Outbound', 'Conversations worth joining', ['engagement-scout', 'linkedin-networker', 'backlink-outreach', 'quora-writer']],
+  ['Ops', 'Scheduling and setup', ['publisher', 'account-setup']],
+];
+function agentRow(a) {
+  const short = a.name.replace(/^multi-/, ''), act = (S.state.activity || {})[short] || {};
+  const age = act.last ? (Date.now() - Date.parse(act.last)) / 36e5 : 1e9;
+  return `<div class="ag" title="${esc(a.description)}"><span class="d ${age < 24 ? 'live' : age < 24 * 7 ? 'recent' : ''}"></span><span class="n">${esc(short)}</span><span class="m">${esc(a.model)}</span><span class="c">${act.count || ''}</span></div>`;
+}
+function teamView() {
+  const agents = S.state.agents || [], by = n => agents.find(a => a.name === 'multi-' + n);
+  const used = new Set(['cmo']);
+  const deptCards = DEPTS.map(([name, sub, names], k) => { const list = names.map(by).filter(Boolean); list.forEach(a => used.add(a.name.replace(/^multi-/, ''))); return `<div class="dept" style="--i:${k}"><h4>${esc(name)}<span class="count">${list.length}</span></h4><p>${esc(sub)}</p>${list.map(agentRow).join('')}</div>`; });
+  const teams = [...new Set(agents.filter(a => a.team !== 'core').map(a => a.team))];
+  const platCards = teams.map((t, k) => { const list = agents.filter(a => a.team === t && !used.has(a.name.replace(/^multi-/, ''))).sort((a, b) => /-lead$/.test(b.name) - /-lead$/.test(a.name)); const p = plat(t === 'syndication' ? 'medium' : t); const label = t === 'syndication' ? 'Quora · Medium · Substack · Email' : t === 'seo' ? 'SEO · Blog' : p.name;
+    return `<div class="dept" style="--i:${k + DEPTS.length}"><h4>${mono(t === 'seo' ? 'SEO' : t === 'syndication' ? 'SY' : p.short, t === 'seo' ? '#22b573' : t === 'syndication' ? '#a07cff' : p.color, 'sm')}${esc(label)}<span class="count">${list.length}</span></h4><p>lead approves before you see it</p>${list.map(agentRow).join('')}</div>`; });
+  const live = Object.values(S.state.activity || {}).filter(a => a.last && Date.now() - Date.parse(a.last) < 864e5).length;
+  const cmo = by('cmo');
+  return head('Team', `${agents.length} agents · ${live} active in the last 24 h · every line in <code>log/</code> lights up an agent.`)
+    + `<div class="org"><div class="node boss"><span class="mono lg" style="--c:var(--accent)">YOU</span><div><b>You · the boss</b><small>approve, send back, send replies</small></div></div><div class="vline"></div>
+      <div class="node brain"><span class="mono lg" style="--c:#3ddc97">AI</span><div><b>The Brain · CMO</b><small>quotas · calendar · batch for your yes${cmo ? ' · ' + esc(cmo.model) : ''}</small></div></div><div class="vline"></div>
+      <div class="depts stagger">${deptCards.join('')}${platCards.join('')}</div>
+      <div class="layers"><div class="layer"><b>Knowledge layer</b><code>brands/&lt;b&gt;/brief.md · kit/ · voice-samples.md · learnings.md</code></div><div class="layer"><b>System of record</b><code>content/ · engagement/ · leads/ · tasks/ · metrics/</code></div><div class="layer"><b>Signals in</b><code>inbox/ (official APIs) · trends/ · Telegram</code></div></div></div>`;
+}
+
 function cardHead(i, extra) {
   const pp = plat(i.platform), bb = brand(i.brand);
   return `<div class="card-head">${mono(pp.short, pp.color, 'lg')}<div class="who"><b>${esc(pp.name)} · ${esc(i.format || i.kind || '')}</b><span>${esc(bb.name)}</span></div>${extra || ''}</div>`;
@@ -553,6 +637,8 @@ document.addEventListener('click', async e => {
     if (!ok && card) card.classList.remove('leaving', 'bad');
   }
 });
+document.addEventListener('mouseover', e => { const v = e.target.closest('.phone video'); if (v) v.play().catch(() => {}); });
+document.addEventListener('mouseout', e => { const v = e.target.closest('.phone video'); if (v) v.pause(); });
 document.addEventListener('input', e => { const id = e.target.dataset.draft || e.target.dataset.note || e.target.dataset.edit; if (id) S.editing.add(id); });
 document.addEventListener('change', e => { if (e.target.dataset.lead) act(e.target.dataset.lead, { status: e.target.value }, 'Lead → ' + e.target.value, 'var(--accent)'); });
 document.addEventListener('keydown', e => { if (e.target.matches('input,textarea,select') || e.metaKey || e.ctrlKey) return; const k = +e.key; if (k >= 1 && k <= VIEWS.length) { S.view = VIEWS[k - 1][0]; location.hash = S.view; render(); } });
