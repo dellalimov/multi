@@ -1,14 +1,14 @@
 {
   "name": "multi-smm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MULTI: an open-source social media department for Claude. 46 agents in platform teams, one local dashboard, every post approved by a human.",
   "type": "module",
-  "bin": { "multi": "bin/multi.mjs" },
-  "files": ["bin", "lib", "dashboard", "docs", "templates", "examples", "agents", "skills", ".claude-plugin"],
+  "bin": { "multi": "cli/multi.mjs" },
+  "files": ["cli", "lib", "dashboard", "docs", "templates", "examples", "agents", "skills", ".claude-plugin"],
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "dashboard": "node bin/multi.mjs dashboard",
-    "demo": "node bin/multi.mjs init --example --workspace ./demo-workspace && node bin/multi.mjs dashboard --workspace ./demo-workspace"
+    "dashboard": "node cli/multi.mjs dashboard",
+    "demo": "node cli/multi.mjs init --example --workspace ./demo-workspace && node cli/multi.mjs dashboard --workspace ./demo-workspace"
   },
   "engines": { "node": ">=18" },
   "keywords": ["claude", "claude-code", "agents", "social-media", "marketing", "instagram", "youtube", "tiktok", "linkedin", "dashboard"],
