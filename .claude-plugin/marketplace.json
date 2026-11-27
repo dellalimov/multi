@@ -1,0 +1,7 @@
+{
+  "name": "multi",
+  "owner": { "name": "MULTI contributors" },
+  "plugins": [
+    { "name": "multi", "source": "./", "description": "Social media department for Claude: 46 agents, weekly cycle, engagement queue, local dashboard." }
+  ]
+}

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MULTI</title>
+<style>
+  :root {
+    --bg: #f4f2ee; --panel: #ffffff; --ink: #16150f; --muted: #6b6860; --line: #e3dfd7;
+    --accent: #1f4cff; --ok: #0f7b4c; --warn: #b4540a; --bad: #b42318; --chip: #ece9e2;
+    --radius: 10px; --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111110; --panel: #1a1a18; --ink: #f1efe9; --muted: #9a968c; --line: #2b2a27; --chip: #24231f; --accent: #6f8cff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.5 var(--sans); background: var(--bg); color: var(--ink); }
+  a { color: var(--accent); }
+  header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 20px; padding: 14px 28px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .mark { font-weight: 800; letter-spacing: .18em; font-size: 15px; }
+  .brands { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 5px 11px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 13px; }
+  .chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .sync { margin-left: auto; color: var(--muted); font-size: 12px; font-family: var(--mono); }
+  .layout { display: grid; grid-template-columns: 210px 1fr; min-height: calc(100vh - 58px); }
+  nav { padding: 20px 14px; border-right: 1px solid var(--line); }
+  nav button { display: flex; justify-content: space-between; width: 100%; padding: 8px 12px; margin-bottom: 2px; border: 0; background: none; color: var(--ink); font: inherit; border-radius: 8px; cursor: pointer; text-align: left; }
+  nav button.on { background: var(--panel); box-shadow: 0 0 0 1px var(--line); font-weight: 600; }
+  nav .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+  nav .n.hot { color: var(--accent); font-weight: 700; }
+  main { padding: 24px 28px 60px; max-width: 1200px; }
+  h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; background: var(--chip); padding: 2px 7px; border-radius: 5px; color: var(--muted); }
+  .tag.brand { background: var(--ink); color: var(--bg); }
+  .hook { font-weight: 650; font-size: 15px; margin: 10px 0 6px; }
+  .meta { color: var(--muted); font-size: 12px; font-family: var(--mono); }
+  .md { font-size: 13.5px; max-height: 280px; overflow: auto; border-top: 1px solid var(--line); margin-top: 10px; padding-top: 6px; }
+  .md h2, .md h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 12px 0 4px; }
+  .md p, .md ul { margin: 4px 0; } .md ul { padding-left: 18px; }
+  .md.open { max-height: none; }
+  .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .btn { text-decoration: none; display: inline-block; border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 7px 13px; border-radius: 8px; font: inherit; font-weight: 550; cursor: pointer; }
+  .btn:hover { border-color: var(--ink); }
+  .btn.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+  .btn.bad { color: var(--bad); }
+  .btn.pri { background: var(--accent); border-color: var(--accent); color: #fff; }
+  textarea, input.note { width: 100%; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; }
+  textarea { min-height: 120px; resize: vertical; }
+  .kanban { display: grid; grid-template-columns: repeat(6, minmax(170px, 1fr)); gap: 10px; overflow-x: auto; }
+  .col h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 8px; }
+  .mini { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; margin-bottom: 8px; font-size: 13px; }
+  .mini b { display: block; font-weight: 600; margin: 4px 0 2px; }
+  .stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin: 12px 0; }
+  .stat { background: var(--bg); border-radius: 8px; padding: 8px 8px; min-width: 0; }
+  .stat .v { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+  select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+  .plat { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+  .plat span { font-size: 12px; padding: 2px 8px; border-radius: 6px; background: var(--chip); }
+  .plat .setup { background: #fff1e0; color: var(--warn); } .plat .off { opacity: .45; text-decoration: line-through; }
+  .empty { color: var(--muted); padding: 30px; text-align: center; border: 1px dashed var(--line); border-radius: var(--radius); }
+  .pri-high { color: var(--bad); font-weight: 700; }
+  .toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 8px; opacity: 0; transition: opacity .2s; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } nav { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 8px; } nav button { white-space: nowrap; width: auto; } .stats { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+<header>
+  <div class="mark">MULTI</div>
+  <div class="brands" id="brands"></div>
+  <div class="sync" id="sync">—</div>
+</header>
+<div class="layout">
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const VIEWS = [
+  ['overview', 'Overview'], ['review', 'Review'], ['engagement', 'Engagement'],
+  ['pipeline', 'Pipeline'], ['leads', 'Leads'], ['tasks', 'Needs you'], ['trends', 'Trends'],
+];
+const STAGES = ['idea', 'draft', 'review', 'approved', 'scheduled', 'published'];
+const S = { state: null, view: location.hash.slice(1) || 'overview', brand: 'all', editing: new Set() };
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+
+function md(src) {
+  const inline = t => esc(t)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/(^|\s)(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  let html = '', list = false;
+  for (const line of String(src || '').split('\n')) {
+    const h = line.match(/^(#{1,4})\s+(.*)/), li = line.match(/^\s*[-*]\s+(.*)/) || line.match(/^\s*\d+\.\s+(.*)/);
+    if (li) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inline(li[1])}</li>`; continue; }
+    if (list) { html += '</ul>'; list = false; }
+    if (h) html += `<h${Math.min(h[1].length + 1, 4)}>${inline(h[2])}</h${Math.min(h[1].length + 1, 4)}>`;
+    else if (line.trim()) html += `<p>${inline(line)}</p>`;
+  }
+  return html + (list ? '</ul>' : '');
+}
+
+function section(body, name) {
+  const parts = String(body || '').split(/^## /m);
+  const p = parts.find(x => x.toLowerCase().startsWith(name.toLowerCase()));
+  return p ? p.slice(p.indexOf('\n') + 1).trim() : '';
+}
+
+const items = type => S.state.items.filter(i => i.type === type && (S.brand === 'all' || i.brand === S.brand));
+const brandName = slug => (S.state.brands.find(b => b.slug === slug) || {}).name || slug || '—';
+
+async function refresh(force) {
+  if (!force && S.editing.size) return; // don't re-render under someone typing
+  try {
+    const r = await fetch('/api/state');
+    S.state = await r.json();
+    $('sync').textContent = 'synced ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    render();
+  } catch { $('sync').textContent = 'offline · retrying'; }
+}
+
+async function act(id, payload, msg) {
+  const r = await fetch('/api/items/' + encodeURIComponent(id), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+  const j = await r.json();
+  if (!r.ok) return toast(j.error || 'failed');
+  S.editing.delete(id);
+  toast(msg || 'saved');
+  refresh(true);
+}
+
+function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 1800); }
+
+function render() {
+  const st = S.state;
+  $('brands').innerHTML = [{ slug: 'all', name: 'All brands' }, ...st.brands]
+    .map(b => `<button class="chip ${S.brand === b.slug ? 'on' : ''}" data-brand="${esc(b.slug)}">${esc(b.name)}</button>`).join('');
+  const counts = {
+    review: items('content').filter(i => i.status === 'review').length,
+    engagement: items('engagement').filter(i => i.status === 'pending').length,
+    leads: items('lead').filter(i => i.status === 'new').length,
+    tasks: items('task').filter(i => i.status === 'open').length,
+    pipeline: items('content').length, trends: st.trends.length, overview: '',
+  };
+  const hot = new Set(['review', 'engagement', 'leads', 'tasks']);
+  $('nav').innerHTML = VIEWS.map(([k, l]) => `<button class="${S.view === k ? 'on' : ''}" data-view="${k}"><span>${l}</span><span class="n ${hot.has(k) && counts[k] ? 'hot' : ''}">${counts[k] || ''}</span></button>`).join('');
+  $('main').innerHTML = (VIEW_RENDER[S.view] || VIEW_RENDER.overview)();
+}
+
+const VIEW_RENDER = {
+  overview() {
+    const st = S.state;
+    const brands = st.brands.filter(b => S.brand === 'all' || b.slug === S.brand);
+    if (!brands.length) return `<h1>Overview</h1><div class="empty">No brands yet. Run the <code>multi-brand-onboarding</code> skill in Claude.</div>`;
+    return `<h1>Overview</h1><p class="sub">Workspace <span class="meta">${esc(st.workspace)}</span></p><div class="grid">` + brands.map(b => {
+      const mine = st.items.filter(i => i.brand === b.slug);
+      const c = (t, s) => mine.filter(i => i.type === t && i.status === s).length;
+      const stats = [['In review', c('content', 'review')], ['Scheduled', c('content', 'scheduled')], ['Engagement', c('engagement', 'pending')], ['New leads', c('lead', 'new')], ['Needs you', c('task', 'open')]];
+      return `<div class="card"><div class="row"><span class="tag brand">${esc(b.name)}</span>${b.website ? `<a class="meta" href="${esc(safeUrl(b.website))}" target="_blank" rel="noopener">${esc(b.website.replace(/^https?:\/\//, ''))}</a>` : ''}</div>
+        <div class="stats">${stats.map(([l, v]) => `<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('')}</div>
+        <div class="plat">${b.platforms.map(p => `<span class="${esc((p.status || '').toLowerCase())}" title="${esc(p.notes || '')}">${esc(p.platform)}${p['quota/week'] ? ' · ' + esc(p['quota/week']) : ''}</span>`).join('') || '<span class="meta">no Active platforms table in brief</span>'}</div></div>`;
+    }).join('') + '</div>';
+  },
+  review() {
+    const list = items('content').filter(i => i.status === 'review');
+    return `<h1>Review</h1><p class="sub">Your team signed these off. Approve to send them to the publisher, or reject with a note.</p>` + (list.length ? `<div class="grid">${list.map(contentCard).join('')}</div>` : `<div class="empty">Nothing waiting for review.</div>`);
+  },
+  engagement() {
+    const list = items('engagement').filter(i => i.status === 'pending');
+    return `<h1>Engagement</h1><p class="sub">Drafted comments, replies, DMs and connection notes. Open the link, paste, send it yourself, then mark sent.</p>` + (list.length ? `<div class="grid">${list.map(engCard).join('')}</div>` : `<div class="empty">Queue is empty.</div>`);
+  },
+  pipeline() {
+    const list = items('content');
+    return `<h1>Pipeline</h1><p class="sub">${list.length} pieces across ${new Set(list.map(i => i.platform)).size} platforms.</p><div class="kanban">` + STAGES.map(s => {
+      const col = list.filter(i => i.status === s);
+      return `<div class="col"><h3>${s} · ${col.length}</h3>${col.map(i => `<div class="mini"><div class="row"><span class="tag">${esc(i.platform)}</span><span class="tag">${esc(i.format)}</span></div><b>${esc(i.hook || i.id)}</b><div class="meta">${esc(brandName(i.brand))}${i.scheduled_at ? ' · ' + esc(i.scheduled_at) : ''}</div></div>`).join('')}</div>`;
+    }).join('') + '</div>' + (list.some(i => i.status === 'rejected') ? `<p class="meta" style="margin-top:14px">${list.filter(i => i.status === 'rejected').length} rejected (kept for the analyst)</p>` : '');
+  },
+  leads() {
+    const list = items('lead');
+    if (!list.length) return `<h1>Leads</h1><div class="empty">No leads yet.</div>`;
+    const opts = ['new', 'contacted', 'qualified', 'won', 'lost'];
+    return `<h1>Leads</h1><p class="sub">People who showed buying intent.</p><table><tr><th>Brand</th><th>Who</th><th>Intent</th><th>Next step</th><th>Value</th><th>Status</th></tr>` + list.map(l => `<tr><td>${esc(brandName(l.brand))}<div class="meta">${esc(l.platform)}</div></td><td>${esc(l.name)}</td><td>${esc(l.intent)}</td><td>${esc(l.next_step)}</td><td>${esc(l.value)}</td><td><select data-lead="${esc(l.id)}">${opts.map(o => `<option ${o === l.status ? 'selected' : ''}>${o}</option>`).join('')}</select></td></tr>`).join('') + '</table>';
+  },
+  tasks() {
+    const list = items('task').sort((a, b) => (a.status === 'done') - (b.status === 'done') || (b.priority === 'high') - (a.priority === 'high'));
+    return `<h1>Needs you</h1><p class="sub">Only you can do these: accounts, logins, recordings, decisions.</p>` + (list.length ? list.map(t => `<div class="card" style="margin-bottom:10px;${t.status === 'done' ? 'opacity:.5' : ''}"><div class="row"><span class="tag brand">${esc(brandName(t.brand))}</span><span class="tag ${t.priority === 'high' ? 'pri-high' : ''}">${esc(t.priority || '')}</span><span class="meta">${esc(t.id)}</span></div><div class="md open">${md(t.body)}</div><div class="actions">${t.status === 'open' ? `<button class="btn ok" data-act="${esc(t.id)}" data-status="done">Done</button>` : `<button class="btn" data-act="${esc(t.id)}" data-status="open">Reopen</button>`}</div></div>`).join('') : `<div class="empty">Nothing needs you.</div>`);
+  },
+  trends() {
+    const list = S.state.trends.filter(t => S.brand === 'all' || t.brand === S.brand);
+    const latest = Object.values(list.reduce((a, t) => (a[t.brand] ||= t, a), {}));
+    return `<h1>Trends</h1><p class="sub">Latest research per brand.</p>` + (latest.length ? latest.map(t => `<div class="card" style="margin-bottom:12px"><div class="row"><span class="tag brand">${esc(brandName(t.brand))}</span><span class="meta">${esc(t.date)}</span></div><div class="md open">${md(t.body.replace(/^---[\s\S]*?---/, ''))}</div></div>`).join('') : `<div class="empty">No trend reports yet.</div>`);
+  },
+};
+
+function contentCard(i) {
+  return `<div class="card"><div class="row"><span class="tag brand">${esc(brandName(i.brand))}</span><span class="tag">${esc(i.platform)}</span><span class="tag">${esc(i.format)}</span>${i.guardian ? `<span class="tag">guardian ${esc(i.guardian)}</span>` : ''}</div>
+    <div class="hook">${esc(i.hook || i.id)}</div><div class="meta">${esc(i.scheduled_at || 'no time set')} · ${esc(i.owner || '')}</div>
+    <div class="md" onclick="this.classList.toggle('open')">${md(i.body)}</div>
+    <input class="note" style="margin-top:12px" placeholder="Note for the team (needed to reject, optional on approve)" data-note="${esc(i.id)}">
+    <div class="actions"><button class="btn ok" data-act="${esc(i.id)}" data-status="approved">Approve</button>
+    <button class="btn bad" data-act="${esc(i.id)}" data-status="rejected" data-neednote>Reject</button></div></div>`;
+}
+
+function engCard(i) {
+  const draft = section(i.body, 'Draft');
+  const theirs = section(i.body, 'Their post') || section(i.body, 'Their message');
+  const url = safeUrl(i.target_url);
+  return `<div class="card"><div class="row"><span class="tag brand">${esc(brandName(i.brand))}</span><span class="tag">${esc(i.platform)}</span><span class="tag">${esc(i.kind)}</span></div>
+    <div class="hook">${esc(i.target_author || '')}</div>
+    ${theirs ? `<div class="meta" style="font-family:var(--sans)">${esc(theirs)}</div>` : ''}
+    ${i.reason ? `<div class="meta" style="margin-top:6px">why: ${esc(i.reason)}</div>` : ''}
+    <textarea style="margin-top:10px" data-draft="${esc(i.id)}">${esc(draft)}</textarea>
+    <div class="actions">${url ? `<a class="btn pri" href="${esc(url)}" target="_blank" rel="noopener">Open</a>` : ''}
+      <button class="btn" data-copy="${esc(i.id)}">Copy</button>
+      <button class="btn ok" data-act="${esc(i.id)}" data-status="sent">Mark sent</button>
+      <button class="btn bad" data-act="${esc(i.id)}" data-status="skipped">Skip</button></div></div>`;
+}
+
+function engBodyWithDraft(item, draft) {
+  const parts = (item.body || '').split(/^(?=## )/m);
+  const i = parts.findIndex(p => /^## Draft\b/.test(p));
+  const block = `## Draft\n${draft.trim()}\n\n`;
+  if (i === -1) parts.push((parts.length ? '\n' : '') + block); else parts[i] = block;
+  return parts.join('');
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-view],[data-brand],[data-act],[data-copy]');
+  if (!t) return;
+  if (t.dataset.view) { S.view = t.dataset.view; location.hash = S.view; render(); }
+  else if (t.dataset.brand) { S.brand = t.dataset.brand; render(); }
+  else if (t.dataset.copy) {
+    const ta = document.querySelector(`[data-draft="${CSS.escape(t.dataset.copy)}"]`);
+    navigator.clipboard.writeText(ta.value).then(() => toast('copied'));
+  } else if (t.dataset.act) {
+    const id = t.dataset.act, status = t.dataset.status;
+    const noteEl = document.querySelector(`[data-note="${CSS.escape(id)}"]`);
+    const note = noteEl ? noteEl.value.trim() : undefined;
+    if (t.hasAttribute('data-neednote') && !note) { noteEl.focus(); return toast('add a note so the team knows why'); }
+    const payload = { status };
+    if (note) payload.note = note;
+    const ta = document.querySelector(`[data-draft="${CSS.escape(id)}"]`);
+    if (ta) { const item = S.state.items.find(x => x.id === id); payload.body = engBodyWithDraft(item, ta.value); }
+    act(id, payload, status);
+  }
+});
+document.addEventListener('input', e => {
+  const id = e.target.dataset.draft || e.target.dataset.note;
+  if (id) S.editing.add(id);
+});
+document.addEventListener('change', e => {
+  if (e.target.dataset.lead) act(e.target.dataset.lead, { status: e.target.value }, 'lead → ' + e.target.value);
+});
+
+window.addEventListener('hashchange', () => { S.view = location.hash.slice(1) || 'overview'; if (S.state) render(); });
+refresh(true);
+setInterval(refresh, 5000);
+</script>
+</body>
+</html>

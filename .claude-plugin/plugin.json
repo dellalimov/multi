@@ -1,0 +1,10 @@
+{
+  "name": "multi",
+  "version": "0.1.0",
+  "description": "MULTI: an open-source social media department for Claude. 46 agents in platform teams (YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit, SEO), a weekly cycle, a daily engagement queue and a local dashboard where a human approves everything.",
+  "author": { "name": "MULTI contributors" },
+  "homepage": "https://github.com/OWNER/multi",
+  "repository": "https://github.com/OWNER/multi",
+  "license": "MIT",
+  "keywords": ["social-media", "marketing", "agents", "instagram", "youtube", "tiktok", "linkedin", "dashboard"]
+}

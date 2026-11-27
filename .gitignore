@@ -1,0 +1,6 @@
+node_modules/
+multi-workspace/
+demo-workspace/
+*.plugin
+.DS_Store
+.env
