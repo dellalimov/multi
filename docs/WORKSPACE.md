@@ -27,16 +27,16 @@ Frontmatter is flat `key: value` pairs (strings, numbers, `true/false`, or
 
 ```markdown
 ---
-id: 2026-12-01-visio-instagram-arrival-card-trap
+id: 2026-12-01-lumen-instagram-neck-reset
 type: content
-brand: visio
+brand: lumen
 platform: instagram          # youtube|instagram|tiktok|x|linkedin|threads|pinterest|reddit|blog|facebook
 format: reel                 # reel|carousel|post|story|short|video|thread|pin|article|comment
 status: draft                # idea → draft → review → approved → scheduled → published  (or rejected)
 owner: instagram-lead        # agent currently responsible
-pillar: fear-hook
-hook: "They let you board. Then Bali sent you back."
-scheduled_at: 2026-12-03T19:00+08:00
+pillar: desk-pain
+hook: "Your neck after a 3-hour Zoom. Fix it before your next call."
+scheduled_at: 2026-12-02T18:30+00:00
 publish_ref:                 # id returned by Metricool/Postiz after scheduling
 review_note:                 # why the human or a lead sent it back
 created: 2026-12-01
@@ -55,16 +55,16 @@ created: 2026-12-01
 
 ```markdown
 ---
-id: 2026-12-01-visio-reddit-voa-question
+id: 2026-12-01-lumen-reddit-neck
 type: engagement
-brand: visio
+brand: lumen
 platform: reddit
 kind: comment                # comment|reply|dm|connection|mention
 status: pending              # pending → approved → sent   (or skipped)
-target_url: https://reddit.com/r/bali/comments/...
+target_url: https://reddit.com/r/lisbon/comments/...
 target_author: u/someone
-reason: Asks how long VoA extension takes; we can answer from experience
-disclosure: "I run Visio, a visa tracker"   # how the brand is identified in the message
+reason: Asks for a yoga class for desk neck pain; subreddit allows recommendations
+disclosure: "I teach at Lumen, so I'm biased"   # how the brand is identified in the message
 created: 2026-12-01
 ---
 ## Their post (summary)
@@ -80,15 +80,15 @@ connection requests by themselves.
 
 ```markdown
 ---
-id: 2026-12-02-movd-ig-dm-sofa
+id: 2026-12-02-lumen-ig-dm-team
 type: lead
-brand: movd
+brand: lumen
 platform: instagram
 status: new                  # new → contacted → qualified → won | lost
 name: "@handle"
-intent: Wants to sell a sofa before moving out on Dec 20
+intent: Asks about weekly classes for a 12-person team
 value: medium                # low|medium|high
-next_step: Send listing link + pickup slots
+next_step: Send corporate pricing and offer a trial date
 created: 2026-12-02
 ---
 Conversation notes...
@@ -98,14 +98,14 @@ Conversation notes...
 
 ```markdown
 ---
-id: connect-dealbridge-linkedin
+id: lumen-linkedin-page
 type: task
-brand: dealbridge
+brand: lumen
 status: open                 # open → done
 priority: high               # low|medium|high
 created: 2026-12-01
 ---
-Create the DealBridge LinkedIn company page and connect it in Metricool.
+Create the Lumen LinkedIn company page and connect it in Postiz.
 ```
 
 ## Status rules
