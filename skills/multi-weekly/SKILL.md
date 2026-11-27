@@ -1,6 +1,6 @@
 ---
 name: multi-weekly
-description: Run MULTI's weekly social media cycle for one brand or all brands in the workspace - trends, plan, produce drafts per platform team, lead review, batch for human approval, analytics. Use when the user says "run the week", "weekly cycle", "plan content for <brand>", or invokes /multi:multi-weekly.
+description: Run MULTI's weekly social media cycle for one brand or all brands in the workspace - trends, plan, produce drafts per platform team, lead review, batch for human approval, analytics. Use when the user says "run the week", "weekly cycle", "plan content for BRAND", or invokes /multi:multi-weekly.
 ---
 
 # MULTI weekly cycle

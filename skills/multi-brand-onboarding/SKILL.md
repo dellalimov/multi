@@ -1,6 +1,6 @@
 ---
 name: multi-brand-onboarding
-description: Add a brand to MULTI - interviews the user (or reads their site and existing docs) and writes brands/<brand>/brief.md, voice-samples.md and setup tasks for missing accounts. Use when the user says "add a brand", "onboard <brand>", or a weekly run finds a brand without a brief.
+description: Add a brand to MULTI - interviews the user (or reads their site and existing docs) and writes brands/BRAND/brief.md, voice-samples.md and setup tasks for missing accounts. Use when the user says "add a brand", "onboard BRAND", or a weekly run finds a brand without a brief.
 ---
 
 # MULTI brand onboarding

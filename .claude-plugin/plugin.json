@@ -1,6 +1,6 @@
 {
   "name": "multi",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MULTI: an open-source social media department for Claude. 56 agents in platform teams (YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit, Facebook, Telegram, SEO, Quora/Medium/Substack), localization incl. Arabic RTL, a weekly cycle, a daily engagement queue and a local dashboard where a human approves everything.",
   "author": {
     "name": "dellalimov",
