@@ -21,15 +21,15 @@ Most "AI social media" tools are either a scheduler with a caption button, or a 
 **As a Claude Code plugin**
 
 ```bash
-/plugin marketplace add OWNER/multi
+/plugin marketplace add dellalimov/multi
 /plugin install multi@multi
 ```
 
 **Dashboard** (Node 18+, no dependencies)
 
 ```bash
-npx github:OWNER/multi init            # creates ./multi-workspace
-npx github:OWNER/multi dashboard       # opens http://localhost:4747
+npx github:dellalimov/multi init            # creates ./multi-workspace
+npx github:dellalimov/multi dashboard       # opens http://localhost:4747
 ```
 
 Try it with the example brand: `npm run demo` from a clone.
