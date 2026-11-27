@@ -16,6 +16,10 @@ multi-workspace/
   engagement/<brand>/<id>.md       a drafted comment / reply / DM / connection note waiting for a human
   leads/<brand>/<id>.md            a person who showed buying intent
   trends/<brand>/<YYYY-MM-DD>.md   trend + virality report for the week
+  brands/<brand>/kit/              brand kit: kit.md (palette, type, rules) + logo files
+  assets/<brand>/<id>/             generated or uploaded media for one content item
+  inbox/<brand>/<id>.md            raw inbound comments/DMs pulled by `multi inbox` (official APIs)
+  metrics/<brand>/<YYYY-MM-DD>.json  weekly metrics snapshot written by the analyst
   tasks/<id>.md                    something only the human can do (connect an account, record a video...)
   log/<YYYY-MM-DD>.md              short run log written by the CMO agent
 ```
@@ -38,6 +42,10 @@ pillar: desk-pain
 hook: "Your neck after a 3-hour Zoom. Fix it before your next call."
 scheduled_at: 2026-12-02T18:30+00:00
 publish_ref:                 # id returned by Metricool/Postiz after scheduling
+lang: en                     # content language; localized copies are <id>.<lang>.md with source: <id>
+dir: ltr                     # rtl for Arabic, Hebrew, Farsi, Urdu
+ai_generated: false          # true if it shows realistic AI-generated people, voices or scenes
+ai_label:                    # required → publisher must set the platform's AI label
 review_note:                 # why the human or a lead sent it back
 created: 2026-12-01
 ---
@@ -46,7 +54,8 @@ created: 2026-12-01
 ## Script / slides
 ...
 ## Assets
-- prompt or file path for each visual
+- url: https://... | file: assets/<brand>/<id>/cover.jpg | kind: image
+- prompt: <image prompt still to render>
 ## Sources
 - link for every fact used
 ```
@@ -106,6 +115,40 @@ priority: high               # low|medium|high
 created: 2026-12-01
 ---
 Create the Lumen LinkedIn company page and connect it in Postiz.
+```
+
+## metrics/&lt;brand&gt;/&lt;date&gt;.json
+
+```json
+{
+  "brand": "lumen",
+  "week_ending": "2026-12-07",
+  "platforms": {
+    "instagram": { "followers": 4210, "reach": 18400, "engagement": 960, "saves": 210, "clicks": 88, "leads": 4, "posts": 5 },
+    "tiktok": { "followers": 1300, "reach": 22100, "engagement": 1400, "clicks": 12, "leads": 1, "posts": 3 }
+  }
+}
+```
+
+Any metric may be missing. The dashboard charts whatever weeks exist.
+
+## inbox/&lt;brand&gt;/&lt;id&gt;.md
+
+Written by `multi inbox`. The community manager turns each into an engagement draft and sets `handled: true`.
+
+```markdown
+---
+id: ig-comment-17890000000000000
+type: inbox
+brand: lumen
+platform: instagram
+kind: comment                # comment | dm
+from: "@someone"
+url: https://www.instagram.com/p/...
+received: 2026-12-01T09:12:00Z
+handled: false
+---
+Do you have classes on Sunday?
 ```
 
 ## Status rules

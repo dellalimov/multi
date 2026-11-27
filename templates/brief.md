@@ -44,7 +44,7 @@ Exact wording for regulated or important claims.
 Things we never say, show or promise.
 
 ## Visual rules
-Colors, fonts, people, settings, logo usage (never generate the logo).
+See `kit/kit.md` for palette, type and logo files. Add people, settings, photo style; never generate the logo.
 
 ## Competitors
 - Name · url · what they do better / worse
@@ -61,6 +61,12 @@ Topics an official auto-reply tool may answer without a human (or "none").
 ## Regulated topics
 e.g. finance, immigration, health, property. Who regulates.
 
+## Languages
+| lang | market | platforms | notes |
+|---|---|---|---|
+| en | global | all | default |
+| ar | UAE | instagram, linkedin | MSA, Western digits, RTL |
+
 ## Active platforms
 | platform | status | handle | quota/week | notes |
 |---|---|---|---|---|
@@ -73,6 +79,13 @@ e.g. finance, immigration, health, property. Who regulates.
 | pinterest | off | | | |
 | reddit | off | | | human account only |
 | blog | on | example.com/blog | 1 | |
+| facebook | off | | | |
+| telegram | off | | | |
+| quora | off | | 3 answers | |
+| medium | off | | republish | canonical to blog |
+| substack | off | | 1 issue | |
+| email | off | | 1 | newsletter |
+| whatsapp | off | | 3 | WhatsApp Channel |
 
 status: on | off | setup (account still to be created)
 

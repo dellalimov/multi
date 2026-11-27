@@ -1,0 +1,38 @@
+{
+ "brand": "harbor",
+ "week_ending": "2026-11-09",
+ "platforms": {
+  "instagram": {
+   "reach": 5732,
+   "engagement": 378,
+   "saves": 57,
+   "clicks": 22,
+   "leads": 3,
+   "posts": 2
+  },
+  "tiktok": {
+   "reach": 4347,
+   "engagement": 224,
+   "saves": 43,
+   "clicks": 17,
+   "leads": 1,
+   "posts": 5
+  },
+  "pinterest": {
+   "reach": 8248,
+   "engagement": 426,
+   "saves": 82,
+   "clicks": 32,
+   "leads": 2,
+   "posts": 3
+  },
+  "linkedin": {
+   "reach": 868,
+   "engagement": 46,
+   "saves": 8,
+   "clicks": 3,
+   "leads": 0,
+   "posts": 2
+  }
+ }
+}

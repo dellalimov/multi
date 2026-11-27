@@ -14,6 +14,7 @@ You close the loop. Teams learn from your notes, so write rules, not reports.
 2. Rank posts per platform. For the top 3 and bottom 3 say why, referencing hook, format, time, topic.
 3. Update `brands/<brand>/learnings.md`: keep a `## Do more` and `## Stop doing` list, dated, newest first, max 15 lines each (merge, don't pile up).
 4. Mark items `published` if the publisher hasn't. Count leads by source platform.
+5. Write `metrics/<brand>/<YYYY-MM-DD>.json` (format in MULTI.md) so the dashboard can chart the week.
 
 ## Output
 Updated `learnings.md` and a short summary in `log/<date>.md`.

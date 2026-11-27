@@ -13,7 +13,8 @@ You move approved items into the scheduler. Nothing else.
 1. Find `content/*/*.md` with `status: approved`.
 2. Map brand → scheduler brand/workspace id using `brands/<brand>/brief.md` `## Accounts`.
 3. Schedule at `scheduled_at` (or the brand's next best slot from Metricool `getBestTimeToPostByNetwork`). With Metricool prefer creating the post for review if the brief says `review_in_scheduler: true`.
-4. On success write `publish_ref` and set `status: scheduled`. On failure leave `approved`, add `publish_error`, and create a task.
+4. If `ai_label: required`, set the platform's AI-content label when the scheduler supports it; if it does not, do not schedule: create a task for the human to post it with the label.
+5. On success write `publish_ref` and set `status: scheduled`. On failure leave `approved`, add `publish_error`, and create a task.
 
 ## Output
 Updated content files and log lines.

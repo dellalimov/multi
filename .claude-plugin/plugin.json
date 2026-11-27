@@ -1,10 +1,22 @@
 {
   "name": "multi",
-  "version": "0.1.1",
-  "description": "MULTI: an open-source social media department for Claude. 46 agents in platform teams (YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit, SEO), a weekly cycle, a daily engagement queue and a local dashboard where a human approves everything.",
-  "author": { "name": "dellalimov", "url": "https://github.com/dellalimov" },
+  "version": "0.2.0",
+  "description": "MULTI: an open-source social media department for Claude. 56 agents in platform teams (YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit, Facebook, Telegram, SEO, Quora/Medium/Substack), localization incl. Arabic RTL, a weekly cycle, a daily engagement queue and a local dashboard where a human approves everything.",
+  "author": {
+    "name": "dellalimov",
+    "url": "https://github.com/dellalimov"
+  },
   "homepage": "https://github.com/dellalimov/multi",
   "repository": "https://github.com/dellalimov/multi",
   "license": "MIT",
-  "keywords": ["social-media", "marketing", "agents", "instagram", "youtube", "tiktok", "linkedin", "dashboard"]
+  "keywords": [
+    "social-media",
+    "marketing",
+    "agents",
+    "instagram",
+    "youtube",
+    "tiktok",
+    "linkedin",
+    "dashboard"
+  ]
 }

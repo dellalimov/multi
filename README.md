@@ -1,8 +1,10 @@
 # MULTI
 
-**A social media department for Claude.** 46 agents organised into platform teams, a weekly content cycle, a daily engagement queue, and a local dashboard where a human approves everything before it goes out.
+**A social media department for Claude.** 56 agents organised into platform teams, a weekly content cycle, a daily engagement queue, and a local dashboard where a human approves everything before it goes out.
 
-Run every brand you own from one place: YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit and SEO, each with its own team and a lead who signs off before you see it.
+Run every brand you own from one place: YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit, Facebook, Telegram, SEO, Quora, Medium, Substack and your newsletter, each with its own team and a lead who signs off before you see it. Content is localized natively (Arabic with right-to-left layouts, Russian, any language in the brief).
+
+[![test](https://github.com/dellalimov/multi/actions/workflows/test.yml/badge.svg)](https://github.com/dellalimov/multi/actions/workflows/test.yml) ![license](https://img.shields.io/badge/license-MIT-black) ![deps](https://img.shields.io/badge/dependencies-0-black)
 
 ![MULTI dashboard](docs/screenshots/overview.png)
 
@@ -14,7 +16,9 @@ Most "AI social media" tools are either a scheduler with a caption button, or a 
 - **A human approves every post.** Leads move work to `review`; only you move it to `approved`. Comments, DMs and connection notes are drafts you send yourself.
 - **It sounds like you.** Every human-facing line goes through a humanizer calibrated on things you actually wrote.
 - **Plain files.** State is markdown in a folder. No database, no vendor lock-in; sync it with git, Dropbox or iCloud.
-- **Many brands.** Each brand has its own brief, voice, platforms and quotas. One dashboard for all of them.
+- **Many brands.** Each brand has its own brief, brand kit, voice, languages, platforms and quotas. One dashboard for all of them.
+- **Approve from your phone.** A Telegram bot sends the batch with Approve / Send back buttons.
+- **Real assets.** A media producer turns prompts into images and video with your connected tools, and AI-generated media gets the platform's AI label.
 
 ## Install
 
@@ -45,12 +49,26 @@ In Claude Code, inside the folder that holds your workspace:
 | `/multi:multi-daily-engagement` | Listening, inbound replies, outbound reply drafts, LinkedIn notes, lead follow-ups |
 | `/multi:multi-publish` | Schedules everything you approved through Metricool or Postiz |
 
+And the CLI (no Claude needed):
+
+```bash
+multi dashboard     # local dashboard
+multi doctor        # check every workspace file
+multi secrets       # create ~/.multi/secrets.json for API keys
+multi inbox         # pull comments and DMs (Instagram, Facebook, YouTube official APIs)
+multi notify        # send the review batch to Telegram
+multi telegram      # handle the Approve / Send back buttons
+```
+
+Setup for every API: [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md). Running it on a schedule: [`docs/AUTOMATION.md`](docs/AUTOMATION.md).
+
 Then open the dashboard:
 
 - **Companies and channels in the sidebar.** Pick a company, a channel, or both; every view filters to that scope, with live counters of what waits for you.
 - **Coverage matrix.** Every company × channel at a glance: active, still to set up, or off, and how many items are waiting. Click a cell to jump into that pipeline.
-- **Review.** Approve, or send back with a note the team reads next run.
+- **Review.** Media previews in phone frames, edit the caption inline, approve one by one or all at once, or send back with a note the team reads next run. Arabic and other RTL languages render right to left.
 - **Engagement.** Edit the draft, open the thread, copy, send it yourself, mark it sent.
+- **Calendar and Analytics.** Two weeks of scheduled posts across every company, and weekly reach, engagement and leads per channel.
 - **Pipeline, Leads, Needs you, Trends.** Kanban by stage, lead status, the tasks only you can do, the latest research.
 - Dark and light themes, keyboard shortcuts `1`–`7` for the tabs, and live sync with the workspace files every few seconds.
 
@@ -60,7 +78,9 @@ Give each company its own accent with `color: "#hex"` in its brief.
 |---|---|
 | ![Review](docs/screenshots/review.png) | ![Engagement](docs/screenshots/engagement.png) |
 
-![Pipeline](docs/screenshots/pipeline.png)
+| Calendar | Analytics |
+|---|---|
+| ![Calendar](docs/screenshots/calendar.png) | ![Analytics](docs/screenshots/analytics.png) |
 
 ## The org chart
 
@@ -68,7 +88,8 @@ Give each company its own accent with `color: "#hex"` in its brief.
 You (approve)
 └── CMO ─ sets quotas per brand × platform, assembles your batch
     ├── Research:  trend-scout · listening · virality-analyst · x-intelligence
-    ├── Quality:   brand-guardian · compliance · humanizer (skill)
+    ├── Quality:   brand-guardian · compliance (incl. AI labels) · humanizer (skill)
+    ├── Craft:     localizer (RU, AR/RTL, any language) · media-producer
     ├── Growth:    repurposer · analyst · paid-amplifier · creator-outreach
     ├── Inbound:   community-manager · lead-router · crisis-desk · reputation
     ├── Outbound:  engagement-scout · linkedin-networker · backlink-outreach
@@ -82,7 +103,10 @@ You (approve)
         Threads    lead · writer
         Pinterest  lead · designer
         Reddit     lead · writer
+        Facebook   lead · writer
+        Telegram   lead · writer
         SEO        lead · strategist · writer · backlink-outreach
+        Syndication lead · quora-writer · longform-syndicator (Medium, Substack) · newsletter-writer (email, WhatsApp Channel)
 ```
 
 All agents live in [`agents/`](agents). Each one is a short markdown file you can edit.
@@ -107,6 +131,10 @@ multi-workspace/
   engagement/<brand>/*.md          drafted comments, replies, DMs, connection notes
   leads/<brand>/*.md               people with buying intent
   trends/<brand>/<date>.md         weekly research
+  brands/<brand>/kit/              palette, type, logo files
+  assets/<brand>/<id>/             rendered media
+  inbox/<brand>/*.md               comments and DMs pulled from official APIs
+  metrics/<brand>/<date>.json      weekly numbers for the analytics view
   tasks/*.md                       things only you can do
 ```
 
@@ -119,7 +147,7 @@ MULTI does not hold your social logins. It schedules through a tool you already 
 - **[Metricool](https://metricool.com)** via its MCP connector (supports "for review" posts).
 - **[Postiz](https://github.com/gitroomhq/postiz-app)**, open source and self-hostable, via its MCP server or CLI.
 
-For inbound comments and DMs on your own accounts, use the platforms' official APIs (Instagram Messaging API, YouTube Data API) or your scheduler's inbox.
+Inbound comments and DMs come in through official APIs (`multi inbox`): Instagram and Facebook via a Meta app on Standard Access for your own Pages, YouTube via a Data API key. See [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md).
 
 ## Ground rules
 

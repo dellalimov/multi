@@ -24,5 +24,9 @@ Three-hour Zoom, stiff neck. Thirty seconds, no mat, no changing clothes.
 Save it for your next long call. First class at the studio is on us, link in bio.
 #lisbon #remotework #deskstretch
 
+## Assets
+- file: assets/lumen/2026-12-01-lumen-instagram-neck-reset/cover.jpg | kind: image | role: cover
+- prompt: B-roll of a laptop desk by a window in Lisbon, morning light
+
 ## Sources
 - Member survey Nov 2026 (internal)

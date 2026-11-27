@@ -1,0 +1,38 @@
+{
+ "brand": "lumen",
+ "week_ending": "2026-11-23",
+ "platforms": {
+  "instagram": {
+   "reach": 12271,
+   "engagement": 570,
+   "saves": 122,
+   "clicks": 49,
+   "leads": 3,
+   "posts": 2
+  },
+  "tiktok": {
+   "reach": 20317,
+   "engagement": 878,
+   "saves": 203,
+   "clicks": 81,
+   "leads": 7,
+   "posts": 4
+  },
+  "threads": {
+   "reach": 2193,
+   "engagement": 133,
+   "saves": 21,
+   "clicks": 8,
+   "leads": 1,
+   "posts": 4
+  },
+  "youtube": {
+   "reach": 4073,
+   "engagement": 186,
+   "saves": 40,
+   "clicks": 16,
+   "leads": 1,
+   "posts": 2
+  }
+ }
+}
