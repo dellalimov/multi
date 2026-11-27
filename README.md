@@ -4,7 +4,7 @@
 
 Run every brand you own from one place: YouTube, Instagram, TikTok, X, LinkedIn, Threads, Pinterest, Reddit and SEO, each with its own team and a lead who signs off before you see it.
 
-![Review queue](docs/screenshots/review.png)
+![MULTI dashboard](docs/screenshots/overview.png)
 
 ## Why MULTI
 
@@ -45,9 +45,22 @@ In Claude Code, inside the folder that holds your workspace:
 | `/multi:multi-daily-engagement` | Listening, inbound replies, outbound reply drafts, LinkedIn notes, lead follow-ups |
 | `/multi:multi-publish` | Schedules everything you approved through Metricool or Postiz |
 
-Then open the dashboard: approve or reject with a note, copy and send engagement drafts, move leads along, tick off the tasks only you can do.
+Then open the dashboard:
 
-![Engagement queue](docs/screenshots/engagement.png)
+- **Companies and channels in the sidebar.** Pick a company, a channel, or both; every view filters to that scope, with live counters of what waits for you.
+- **Coverage matrix.** Every company × channel at a glance: active, still to set up, or off, and how many items are waiting. Click a cell to jump into that pipeline.
+- **Review.** Approve, or send back with a note the team reads next run.
+- **Engagement.** Edit the draft, open the thread, copy, send it yourself, mark it sent.
+- **Pipeline, Leads, Needs you, Trends.** Kanban by stage, lead status, the tasks only you can do, the latest research.
+- Dark and light themes, keyboard shortcuts `1`–`7` for the tabs, and live sync with the workspace files every few seconds.
+
+Give each company its own accent with `color: "#hex"` in its brief.
+
+| Review | Engagement (light) |
+|---|---|
+| ![Review](docs/screenshots/review.png) | ![Engagement](docs/screenshots/engagement.png) |
+
+![Pipeline](docs/screenshots/pipeline.png)
 
 ## The org chart
 

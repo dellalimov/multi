@@ -7,6 +7,7 @@ scheduler: postiz
 scheduler_brand_id:
 review_in_scheduler: false
 timezone: Europe/Lisbon
+color: "#3ddc97"
 ---
 
 # Lumen Studio (fictional example brand)

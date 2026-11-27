@@ -7,6 +7,7 @@ scheduler: metricool          # metricool | postiz | none
 scheduler_brand_id:            # Metricool brand id or Postiz workspace id
 review_in_scheduler: false     # true = create posts "for review" in the scheduler too
 timezone: UTC
+color: "#1f4cff"               # optional accent for this brand in the dashboard
 ---
 
 # Acme
